@@ -68,3 +68,107 @@ Here is a sample JSON paylod, which can be used to test the Model API:
       }
     }
 ```
+
+## Setup instructions
+
+This project requires the following [compute environments](https://docs.dominodatalab.com/en/latest/user_guide/f51038/environments/) to be present:
+
+### Ray Workspace 2.2.0
+
+**Environment Base** 
+
+`quay.io/domino/compute-environment-images:ubuntu18-py3.8-r4.1-domino5.1-standard`
+
+**Dockerfile Instructions**
+
+```
+USER root
+### Must install cmake if you install Ray RLlib (or "all", which includes it)!
+RUN apt-get update -y && apt-get install -y cmake
+RUN pip install \
+    ray[all]==2.2.0 \
+    modin==0.12.1 \
+    pyarrow==7.0.0 \
+    tblib==1.7.0
+RUN pip install \
+    xgboost_ray==0.1.15
+    
+USER ubuntu
+
+RUN pip install --user \
+    imblearn==0.0 \
+    eli5==0.13.0 \
+    argparse==1.4.0
+```
+
+**Pluggable Workspace Tools**
+
+
+```
+jupyter:
+  title: "Jupyter (Python, R, Julia)"
+  iconUrl: "/assets/images/workspace-logos/Jupyter.svg"
+  start: [ "/opt/domino/workspaces/jupyter/start" ]
+  httpProxy:
+    port: 8888
+    rewrite: false
+    internalPath: "/{{ownerUsername}}/{{projectName}}/{{sessionPathComponent}}/{{runId}}/{{#if pathToOpen}}tree/{{pathToOpen}}{{/if}}"
+    requireSubdomain: false
+  supportedFileExtensions: [ ".ipynb" ]
+jupyterlab:
+  title: "JupyterLab"
+  iconUrl: "/assets/images/workspace-logos/jupyterlab.svg"
+  start: [  /opt/domino/workspaces/jupyterlab/start ]
+  httpProxy:
+    internalPath: "/{{ownerUsername}}/{{projectName}}/{{sessionPathComponent}}/{{runId}}/{{#if pathToOpen}}tree/{{pathToOpen}}{{/if}}"
+    port: 8888
+    rewrite: false
+    requireSubdomain: false
+vscode:
+  title: "vscode"
+  iconUrl: "/assets/images/workspace-logos/vscode.svg"
+  start: [ "/opt/domino/workspaces/vscode/start" ]
+  httpProxy:
+    port: 8888
+    requireSubdomain: false
+rstudio:
+  title: "RStudio"
+  iconUrl: "/assets/images/workspace-logos/Rstudio.svg"
+  start: [ "/opt/domino/workspaces/rstudio/start" ]
+  httpProxy:
+    port: 8888
+    requireSubdomain: false
+```
+
+### Ray Cluster 2.2.0
+
+**Environment Base** 
+
+`rayproject/ray-ml:2.2.0-py38`
+
+**Supported Cluster Settings**
+
+Ray
+
+
+**Dockerfile Instructions**
+```
+RUN pip install \
+    pyarrow==7.0.0
+
+RUN pip install \
+    xgboost_ray==0.1.15
+
+# Below is needed to avoid error (may only occur on longer Tune runs):
+# KeyError: 'getpwuid(): uid not found: 12574'
+USER root
+RUN \
+  groupadd -g 12574 ubuntu && \
+  useradd -u 12574 -g 12574 -m -N -s /bin/bash ubuntu
+
+RUN chmod -R 777 /home/ray
+
+RUN pip uninstall -y pandas && \
+    pip install pandas==1.3.5
+USER ubuntu
+```
