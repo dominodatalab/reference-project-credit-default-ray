@@ -4,11 +4,13 @@ import glob
 import eli5
 import shutil
 import argparse
+import json
 
 import xgboost_ray as xgbr
 import xgboost as xgb
 import modin.pandas as mpd
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_absolute_error
@@ -18,7 +20,7 @@ from ray import tune
 def train(ray_actors,
           cpus_per_actor,
           tune_samples,
-          DATA_ROOT = "/domino/datasets/local/FS-Demo/data", 
+          DATA_ROOT = os.path.join("/domino/datasets/local", os.environ["DOMINO_PROJECT_NAME"], "data"), 
           MODEL_ROOT = "/mnt",
           TUNE_ROOT = os.path.join("/domino/datasets/local", os.environ["DOMINO_PROJECT_NAME"], "ray_results")):
     
@@ -99,6 +101,18 @@ def train(ray_actors,
     pred_class = (predictions > 0.5).astype("int") 
     actuals = df_test[target_col]
     print("Accuracy on test: {:.2f}".format(accuracy_score(pred_class, actuals)))
+    
+    # Save Stats
+    with open('/mnt/dominostats.json', 'w') as f:
+        f.write(json.dumps({"Accuracy": round(accuracy_score(pred_class, actuals), 3)}))
+    
+    # Save some plots to the results folder
+    ax1 = xgb.plot_importance(bst, importance_type="gain", max_num_features=10, show_values=False)
+    ax1.figure.savefig('/mnt/results/feature_importance_gain.png')
+    ax2 = xgb.plot_importance(bst, importance_type="weight", max_num_features=10)
+    ax2.figure.savefig('/mnt/results/feature_importance_weight.png')
+    ax3 = xgb.plot_importance(bst, importance_type="cover", max_num_features=10, show_values=False)
+    ax2.figure.savefig('/mnt/results/feature_importance_cover.png')
     
 def main():
         
