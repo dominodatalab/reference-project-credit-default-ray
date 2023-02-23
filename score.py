@@ -1,10 +1,16 @@
 import xgboost as xgb
 
 import pandas as pd
+from domino_data_capture.data_capture_client import DataCaptureClient
+import uuid
 
 xgc = xgb.Booster(model_file="tune_best.xgb")
 
-def predict_credit(checking_account_A14, credit_history_A34, property_A121, checking_account_A13, other_installments_A143, debtors_guarantors_A103, savings_A65, age, employment_since_A73, savings_A61):
+feature_names = ["checking_account_A14", "credit_history_A34", "property_A121", "checking_account_A13", "other_installments_A143", "debtors_guarantors_A103", "savings_A65", "age", "employment_since_A73", "savings_A61"]
+predict_names = ['credit']
+pred_client = DataCaptureClient(feature_names, predict_names)
+
+def predict_credit(checking_account_A14, credit_history_A34, property_A121, checking_account_A13, other_installments_A143, debtors_guarantors_A103, savings_A65, age, employment_since_A73, savings_A61, customer_id=None):
     
     column_names = ['duration', 'credit_amount', 'installment_rate', 'residence', 'age', 'credits', 'dependents', 'checking_account_A11', 'checking_account_A12', 'checking_account_A13', 'checking_account_A14', 'credit_history_A30', 'credit_history_A31',
                     'credit_history_A32', 'credit_history_A33', 'credit_history_A34', 'purpose_A40', 'purpose_A41', 'purpose_A410', 'purpose_A42', 'purpose_A43', 'purpose_A44', 'purpose_A45', 'purpose_A46', 'purpose_A48', 'purpose_A49', 'savings_A61', 
@@ -33,7 +39,16 @@ def predict_credit(checking_account_A14, credit_history_A34, property_A121, chec
     
     xgtest = xgb.DMatrix(df)
     predictions = xgc.predict(xgtest)
-    pred_class = (predictions > 0.5).astype("int") 
+    pred_class = (predictions > 0.5).astype("int")
+    
+    if customer_id is None:
+        print(f"No Customer ID found! Creating a new one.")
+        customer_id = str(uuid.uuid4())
+        print(customer_id)
+        
+    feature_array = list([checking_account_A14, credit_history_A34, property_A121, checking_account_A13, other_installments_A143, debtors_guarantors_A103, savings_A65, age, employment_since_A73, savings_A61])
+    predictions = list(map(float,predictions))
+    pred_client.capturePrediction(feature_array, list(predictions), event_id=customer_id)
     
     return int(pred_class)
 
