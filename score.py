@@ -40,6 +40,7 @@ def predict_credit(checking_account_A14, credit_history_A34, property_A121, chec
     xgtest = xgb.DMatrix(df)
     predictions = xgc.predict(xgtest)
     pred_class = (predictions > 0.5).astype("int")
+    return_dict = {"score" : float(predictions[0]), "class" : int(pred_class)}
     
     if customer_id is None:
         print(f"No Customer ID found! Creating a new one.")
@@ -50,7 +51,7 @@ def predict_credit(checking_account_A14, credit_history_A34, property_A121, chec
     predictions = list(map(float,predictions))
     pred_client.capturePrediction(feature_array, list(predictions), event_id=customer_id)
     
-    return int(pred_class)
+    return dict(return_dict)
 
 def main():
     

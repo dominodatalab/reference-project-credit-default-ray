@@ -57,7 +57,7 @@ def generate(n_chunks, chunk_size, file_name_prefix):
     print("Number of samples in the generated set is: {:,}".format(n_chunks * chunk_size))
 
 # Generate training data
-generate(1, randint(400, 600), DATA_PATH + "/data/scoring_data_")
+generate(1, randint(100, 300), DATA_PATH + "/data/scoring_data_")
 
 #read in the new scoring data
 df_inf = pd.read_csv(SCORING_SET, sep=",")
@@ -87,14 +87,14 @@ for n in range(inputs.shape[0]):
         scoring_request = {'data' : setup_dict}
         
         
-        response = requests.post("https://demo2.dominodatalab.com:443/models/63f7c48dd5846f747c17d5bb/latest/model",
-    auth=(
-        "OulQKmLjdMPLohQZnOrBGk4CHFvIdWAIBz1F3cBmXase7oNeneH72UA1VCM7rfla",
-        "OulQKmLjdMPLohQZnOrBGk4CHFvIdWAIBz1F3cBmXase7oNeneH72UA1VCM7rfla"
+    response = requests.post("https://demo2.dominodatalab.com:443/models/63f889a99fb0fd477f3a599e/latest/model",
+        auth=(
+        "B0HjcRkGR9YqicRzxRIN08rc2hor1vsZdPoR5mFF1BvvbR1iFRZZKRBgb8RWvGNv",
+        "B0HjcRkGR9YqicRzxRIN08rc2hor1vsZdPoR5mFF1BvvbR1iFRZZKRBgb8RWvGNv"
     ),
         json=scoring_request
     )
-    results.append(response.json().get('result'))
+    results.append(response.json().get('result').get('class'))
 
 print('Scoring complete')
 

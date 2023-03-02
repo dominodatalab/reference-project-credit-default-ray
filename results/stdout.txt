@@ -1,0 +1,43 @@
+[W 2023-03-02 14:44:10.699 ServerApp] notebook_dir is deprecated, use root_dir
+[I 2023-03-02 14:44:10.776 ServerApp] jupyter_server_mathjax | extension was successfully linked.
+[I 2023-03-02 14:44:10.776 ServerApp] jupyter_server_proxy | extension was successfully linked.
+[W 2023-03-02 14:44:10.780 LabApp] 'iopub_data_rate_limit' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2023-03-02 14:44:10.787 ServerApp] jupyterlab | extension was successfully linked.
+[I 2023-03-02 14:44:10.787 ServerApp] jupyterlab_git | extension was successfully linked.
+[I 2023-03-02 14:44:10.797 ServerApp] Writing Jupyter server cookie secret to /home/ubuntu/.local/share/jupyter/runtime/jupyter_cookie_secret
+[I 2023-03-02 14:44:10.982 ServerApp] nbclassic | extension was successfully linked.
+[I 2023-03-02 14:44:10.982 ServerApp] nbdime | extension was successfully linked.
+[W 2023-03-02 14:44:11.020 ServerApp] All authentication is disabled.  Anyone who can connect to this server will be able to run code.
+[I 2023-03-02 14:44:11.025 ServerApp] nbclassic | extension was successfully loaded.
+[I 2023-03-02 14:44:11.026 ServerApp] jupyter_server_mathjax | extension was successfully loaded.
+[I 2023-03-02 14:44:11.039 ServerApp] jupyter_server_proxy | extension was successfully loaded.
+[I 2023-03-02 14:44:11.040 LabApp] JupyterLab extension loaded from /opt/conda/lib/python3.8/site-packages/jupyterlab
+[I 2023-03-02 14:44:11.040 LabApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 2023-03-02 14:44:11.045 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2023-03-02 14:44:11.052 ServerApp] jupyterlab_git | extension was successfully loaded.
+[I 2023-03-02 14:44:11.106 ServerApp] nbdime | extension was successfully loaded.
+[I 2023-03-02 14:44:11.107 ServerApp] Serving notebooks from local directory: /
+[I 2023-03-02 14:44:11.107 ServerApp] Jupyter Server 1.13.5 is running at:
+[I 2023-03-02 14:44:11.107 ServerApp] http://run-6400b60cd5846f747c17f26b-r95n9:8888/bryan_prosser/CreditRisk/notebookSession/6400b60cd5846f747c17f26b/lab/tree/mnt
+[I 2023-03-02 14:44:11.107 ServerApp]  or http://127.0.0.1:8888/bryan_prosser/CreditRisk/notebookSession/6400b60cd5846f747c17f26b/lab/tree/mnt
+[I 2023-03-02 14:44:11.107 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 2023-03-02 14:44:15.691 ServerApp] 302 GET /bryan_prosser/CreditRisk/notebookSession/6400b60cd5846f747c17f26b/ (10.12.38.85) 0.69ms
+[I 2023-03-02 14:44:16.077 ServerApp] 302 GET /bryan_prosser/CreditRisk/notebookSession/6400b60cd5846f747c17f26b/ (10.12.38.85) 0.44ms
+[I 2023-03-02 14:44:25.657 LabApp] Build is up to date
+[W 2023-03-02 14:53:24.118 ServerApp] delete /mnt/streamlit_app-Copy1.py
+[W 2023-03-02 14:53:24.119 ServerApp] Skipping trash for /mnt/streamlit_app-Copy1.py, on different device to home directory
+[W 2023-03-02 14:53:32.423 ServerApp] delete /mnt/scratch-josh.ipynb
+[W 2023-03-02 14:53:32.423 ServerApp] Skipping trash for /mnt/scratch-josh.ipynb, on different device to home directory
+[I 2023-03-02 14:53:59.719 ServerApp] Creating new notebook in /mnt/monitoring
+[I 2023-03-02 14:53:59.730 ServerApp] Writing notebook-signing key to /home/ubuntu/.local/share/jupyter/notebook_secret
+[I 2023-03-02 14:54:00.711 ServerApp] Kernel started: 3e49e3e9-e26e-4802-a27e-305f78dd9c06
+[I 2023-03-02 14:54:01.789 ServerApp] Starting buffering for 3e49e3e9-e26e-4802-a27e-305f78dd9c06:db611df9-540b-4394-b3b8-24978feb4b49
+[I 2023-03-02 14:56:01.075 ServerApp] Saving file at /mnt/monitoring/Untitled.ipynb
+[I 2023-03-02 14:56:29.591 ServerApp] Saving file at /mnt/monitoring/DailyScoring.py
+[I 2023-03-02 14:56:33.939 ServerApp] New terminal with automatic name: 1
+TermSocket.open: 1
+TermSocket.open: Opened 1
+[I 2023-03-02 14:58:01.462 ServerApp] Saving file at /mnt/monitoring/Untitled.ipynb
+[I 2023-03-02 15:00:02.215 ServerApp] Saving file at /mnt/monitoring/Untitled.ipynb
+[I 2023-03-02 15:02:02.995 ServerApp] Saving file at /mnt/monitoring/Untitled.ipynb
+[I 2023-03-02 17:01:01.863 ServerApp] Saving file at /mnt/monitoring/Untitled.ipynb
