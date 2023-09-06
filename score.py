@@ -4,7 +4,7 @@ import pandas as pd
 from domino_data_capture.data_capture_client import DataCaptureClient
 import uuid
 
-xgc = xgb.Booster(model_file="tune_best.xgb")
+xgc = xgb.Booster(model_file="/mnt/artifacts/tune_best.xgb")
 
 feature_names = ["checking_account_A14", "credit_history_A34", "property_A121", "checking_account_A13", "other_installments_A143", "debtors_guarantors_A103", "savings_A65", "age", "employment_since_A73", "savings_A61"]
 predict_names = ['credit']

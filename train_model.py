@@ -20,9 +20,9 @@ from ray import tune
 def train(ray_actors,
           cpus_per_actor,
           tune_samples,
-          DATA_ROOT = os.path.join("/domino/datasets/local", os.environ["DOMINO_PROJECT_NAME"], "data"), 
-          MODEL_ROOT = "/mnt",
-          TUNE_ROOT = os.path.join("/domino/datasets/local", os.environ["DOMINO_PROJECT_NAME"], "ray_results")):
+          DATA_ROOT = os.path.join("/mnt/data", os.environ["DOMINO_PROJECT_NAME"], "data"), 
+          MODEL_ROOT = "/mnt/artifacts",
+          TUNE_ROOT = os.path.join("/mnt/data", os.environ["DOMINO_PROJECT_NAME"], "ray_results")):
     
     print("Connecting to Ray...")
     if ray.is_initialized() == False:
@@ -103,7 +103,7 @@ def train(ray_actors,
     print("Accuracy on test: {:.2f}".format(accuracy_score(pred_class, actuals)))
     
     # Save Stats
-    with open('/mnt/dominostats.json', 'w') as f:
+    with open("dominostats.json", 'w') as f:
         f.write(json.dumps({"Accuracy": round(accuracy_score(pred_class, actuals), 3)}))
     
     # Save some plots to the results folder
