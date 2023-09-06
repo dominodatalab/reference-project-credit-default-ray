@@ -1,7 +1,0 @@
-altair
-pandas
-streamlit
-matplotlib
-numpy==1.18.5
-seaborn==0.11.0
-eli5
