@@ -8,7 +8,6 @@ import json
 
 import xgboost_ray as xgbr
 import xgboost as xgb
-import modin.pandas as mpd
 import pandas as pd
 import matplotlib.pyplot as plt
 
