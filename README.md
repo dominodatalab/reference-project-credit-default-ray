@@ -88,7 +88,7 @@ RUN pip install xgboost-ray==0.1.15 \
     && pip install eli5==0.13.0
     
 RUN pip install altair==5.1.1 \
-    && pip install --user streamlit==1.26.0
+    && pip install --user streamlit==1.26.0 argparse==1.4.0 imblearn==0.0
 ```
 
 **Pluggable Workspace Tools**
