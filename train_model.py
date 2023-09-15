@@ -13,7 +13,11 @@ import matplotlib.pyplot as plt
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_absolute_error
-from ray import tune
+
+from ray import tune, ray
+
+from ray.air import session
+from ray.air.integrations.mlflow import MLflowLoggerCallback
 
 
 def train(ray_actors,
@@ -84,7 +88,9 @@ def train(ray_actors,
         mode="min",
         num_samples=tune_samples,
         verbose=1,
-        progress_reporter=tune.CLIReporter()
+        progress_reporter=tune.CLIReporter(),
+        callbacks=[MLflowLoggerCallback(experiment_name="cc_fraud", 
+                                        save_artifact=True)]
     )
     
     shutil.copy(
