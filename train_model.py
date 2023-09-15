@@ -107,11 +107,11 @@ def train(ray_actors,
     
     # Save some plots to the results folder
     ax1 = xgb.plot_importance(bst, importance_type="gain", max_num_features=10, show_values=False)
-    ax1.figure.savefig('/mnt/results/feature_importance_gain.png')
+    ax1.figure.savefig(os.path.join(MODEL_ROOT, "feature_importance_gain.png"))
     ax2 = xgb.plot_importance(bst, importance_type="weight", max_num_features=10)
-    ax2.figure.savefig('/mnt/results/feature_importance_weight.png')
+    ax2.figure.savefig(os.path.join(MODEL_ROOT, "feature_importance_weight.png"))
     ax3 = xgb.plot_importance(bst, importance_type="cover", max_num_features=10, show_values=False)
-    ax2.figure.savefig('/mnt/results/feature_importance_cover.png')
+    ax2.figure.savefig(os.path.join(MODEL_ROOT, "feature_importance_cover.png"))
     
 def main():
         
