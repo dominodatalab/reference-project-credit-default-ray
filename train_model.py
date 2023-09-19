@@ -89,8 +89,8 @@ def train(ray_actors,
         num_samples=tune_samples,
         verbose=1,
         progress_reporter=tune.CLIReporter(),
-        callbacks=[MLflowLoggerCallback(experiment_name="cc_fraud", 
-                                        save_artifact=True)]
+        #callbacks=[MLflowLoggerCallback(experiment_name="cc_fraud", 
+        #                                save_artifact=True)]
     )
     
     shutil.copy(
